@@ -14,23 +14,34 @@ To keep the dataset manageable in size, assemblies are packaged into
 `.tar.xz` archives using **Miniphy** compression.\
 Each archive contains up to \~4000 gzipped FASTA files.
 
-This compression is essential — for example, in release 0.2: - All
-assemblies as individual gzipped FASTA files: **\~3.1 TB** - Same
-assemblies as `.tar.xz` batches: **\~89 GB**
+This compression is essential for the database however, the downside is:
 
-However, the downside is: - You must **identify** which archive holds
-your genome(s) - **wget** the whole `.tar.xz` batch - **tar** out the
-exact FASTA(s) you care about
+1.  You must **identify** which archive holds your genome(s)
+
+2.  **wget** the whole `.tar.xz` batch
+
+3.  **tar** out the exact assembly you care about
 
 ### The ATB Metadata
 
-The file `file_list.all.latest.tsv.gz` contains everything you need to
-find and download assemblies: - `sample` – INSDC sample accession -
-`species_sylph` – species name from Sylph - `species_miniphy` –
-Miniphy’s species name - `filename_in_tar_xz` – file path inside the
-`.tar.xz` - `tar_xz` – name of the `.tar.xz` file containing the
-assembly - `tar_xz_url` – OSF download URL - `tar_xz_md5` – checksum for
-file integrity - `tar_xz_size_MB` – file size in MB
+The file [`file_list.all.latest.tsv.gz`](https://osf.io/4yv85) contains
+everything you need to find and download assemblies:
+
+-   `sample`: SAMN sample accession
+
+-   `species_sylph`: species name from Sylph
+
+-   `species_miniphy`: species name from Miniphy
+
+-   `filename_in_tar_xz`: file path inside the `.tar.xz`
+
+-   `tar_xz`: name of the `.tar.xz` file containing the assembly
+
+-   `tar_xz_url`: OSF download URL
+
+-   `tar_xz_md5`: checksum for file integrity
+
+-   `tar_xz_size_MB`: file size in MB
 
 You can technically do this manually with a combination of `awk`,
 `wget`, and `tar`, but it’s time-consuming. It’s even worse when you
@@ -61,7 +72,7 @@ it manually before running large downloads.
 Clone the repo:
 
 ```         
-git clone <https://github.com/yourusername/atb-fetch.git> 
+git clone <https://github.com/mtaouk/atb-fetch.git> 
 cd atb-fetch
 ```
 
@@ -81,7 +92,7 @@ python atb-fetch.py --species "serratia" --run-downloads
 ### Options
 
 | Option               | Argument           | Description                                                                                                                                      |
-|----------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------------|-----------------------|------------------------------|
 | `-h`, `--help`       | *(none)*           | Show the help message with a full list of options, then exit.                                                                                    |
 | `--url`              | `URL`              | OSF download URL for the AllTheBacteria metadata file. Defaults to the latest version. You can override if you have a different source.          |
 | `--infile`           | `INFILE`           | Path to a **local** metadata TSV or TSV.gz file. Skips downloading from OSF if provided. Useful if you already have the file.                    |
