@@ -4,15 +4,57 @@ Fetch and filter [**AllTheBacteria**](https://allthebacteria.org/)
 genome assemblies by species, with optional download and extraction of
 compressed tar archives.
 
-## Features
+------------------------------------------------------------------------
 
--   Pull the latest ATB metadata file from OSF, or use a local copy\
--   Filter assemblies by species name (case-insensitive regex)\
--   Preview matches before downloading\
--   Download only the tarballs you need\
--   Extract the exact assemblies from each tarball\
--   Optional dry-run mode to see what would be downloaded\
--   Clean up tarballs automatically after extraction
+## About AllTheBacteria (ATB)
+
+[AllTheBacteria (ATB)](https://osf.io/4yv85/) is a public collection of
+over two million bacterial genome assemblies.\
+To keep the dataset manageable in size, assemblies are packaged into
+`.tar.xz` archives using **Miniphy** compression.\
+Each archive contains up to \~4000 gzipped FASTA files.
+
+This compression is essential — for example, in release 0.2: - All
+assemblies as individual gzipped FASTA files: **\~3.1 TB** - Same
+assemblies as `.tar.xz` batches: **\~89 GB**
+
+However, the downside is: - You must **identify** which archive holds
+your genome(s) - **wget** the whole `.tar.xz` batch - **tar** out the
+exact FASTA(s) you care about
+
+### The ATB Metadata
+
+The file `file_list.all.latest.tsv.gz` contains everything you need to
+find and download assemblies: - `sample` – INSDC sample accession -
+`species_sylph` – species name from Sylph - `species_miniphy` –
+Miniphy’s species name - `filename_in_tar_xz` – file path inside the
+`.tar.xz` - `tar_xz` – name of the `.tar.xz` file containing the
+assembly - `tar_xz_url` – OSF download URL - `tar_xz_md5` – checksum for
+file integrity - `tar_xz_size_MB` – file size in MB
+
+You can technically do this manually with a combination of `awk`,
+`wget`, and `tar`, but it’s time-consuming. It’s even worse when you
+want **everything for a whole species or genus**, since those assemblies
+are often scattered across many different archives.
+
+## How this tool helps
+
+This script **automates** the whole process using only Python’s standard
+library:
+
+-   Give it a **species or genus name** (regex, case-insensitive) and it
+    searches both `species_sylph` and `species_miniphy` columns.
+-   Finds all matching rows across the full ATB metadata.
+-   Downloads only the tarballs that actually contain matches.
+-   Extracts only the matching FASTA files from each tarball.
+-   Lets you preview or save the filtered metadata before downloading so
+    you can sanity-check the results.
+
+💡 **Tip:**\
+Filtering uses **both** `species_sylph` and `species_miniphy` for regex
+matches.\
+It’s worth saving the filtered metadata (`--save-filtered`) and checking
+it manually before running large downloads.
 
 ## Installation
 
