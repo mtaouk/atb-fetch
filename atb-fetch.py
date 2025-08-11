@@ -89,7 +89,6 @@ def main():
     ap.add_argument("--jobs", type=int, default=4, help="Concurrent downloads. Default: 4")
     ap.add_argument("--output-dir", default="assemblies", help="Directory to write extracted FASTA files.")
     ap.add_argument("--delete-tars", action="store_true", help="Delete downloaded tar.xz files after extraction. Default: keep")
-    ap.add_argument("--strip-components", type=int, default=1, help="tar --strip-components value for extraction.")
     ap.add_argument("--dry-run", action="store_true", help="Show planned downloads/extractions without performing them")
     args = ap.parse_args()
 
@@ -253,7 +252,7 @@ def main():
         misses_total = []
         for (tarname, _url), members in plan.items():
             tar_path = tars_dir / tarname
-            missing = extract_selected(tar_path, members, outdir, strip_components=args.strip_components)
+            missing = extract_selected(tar_path, members, outdir, strip_components=1)
             if missing:
                 print(f"Warning: {tarname} missing {len(missing)} expected members", file=sys.stderr)
                 misses_total.extend(list(missing))
