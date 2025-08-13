@@ -48,7 +48,7 @@ You can technically do this manually with a combination of `awk`,
 want **everything for a whole species or genus**, since those assemblies
 are often scattered across many different archives.
 
-## How this tool helps
+## How this script helps
 
 This script **automates** the whole process using only Python’s standard
 library:
