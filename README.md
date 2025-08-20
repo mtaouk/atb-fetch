@@ -61,7 +61,7 @@ library:
 -   Lets you preview or save the filtered metadata before downloading so
     you can sanity-check the results.
 
-💡 **Tip:**\
+**Tip:**\
 Filtering uses **both** `species_sylph` and `species_miniphy` for regex
 matches.\
 It’s worth saving the filtered metadata (`--save-filtered`) and checking
@@ -106,17 +106,3 @@ python atb-fetch.py --species "serratia" --run-downloads
 | `--output-dir`       | `OUTPUT_DIR`       | Directory where extracted FASTA files will be saved.                                                                                             |
 | `--delete-tars`      | *(flag)*           | Delete the downloaded `.tar.xz` files after extraction. Default: keep them.                                                                      |
 | `--dry-run`          | *(flag)*           | Show which tarballs and FASTA files **would** be downloaded and extracted without actually doing it. Great for testing your filters first.       |
-
-### Notes
-
--   **Metadata source:** [AllTheBacteria OSF](https://osf.io/4yv85/)
--   Tar archives use `miniphy` compression (\~35× smaller than gzipped
-    FASTA)
--   You must download and extract to access individual assemblies
--   Filtering uses case-insensitive regular expressions, so `"serratia"`
-    will match `"Serratia marcescens"` and `"Serratia sp."`
--   The script checks both the `species_miniphy` and `species_sylph`
-    columns for regex matches — you may want to use `--save-filtered`
-    and review the output TSV to confirm the results match your intent
--   The script only uses Python’s standard library — no extra installs
-    needed
