@@ -102,7 +102,7 @@ python atb-fetch.py --species "serratia" --run-downloads
 | `--save-filtered`    | `SAVE_FILTERED`    | Path to save the filtered metadata (can be `.gz` or `.tsv`). Handy for checking what was matched.                                                |
 | `--preview`          | `PREVIEW`          | Show the first **N** matching rows from the filtered metadata. Default: `5`.                                                                     |
 | `--run-downloads`    | *(flag)*           | Actually download the matching tarballs and extract their FASTA files. Without this flag, the script only filters metadata.                      |
-| `--jobs`             | `JOBS`             | Number of concurrent downloads. Default: `4`. Increase for faster downloads if your internet is good.                                            |
+| `--jobs`             | `JOBS`             | Number of concurrent downloads. Default: `4`. Increase for faster downloads.                                                                     |
 | `--output-dir`       | `OUTPUT_DIR`       | Directory where extracted FASTA files will be saved.                                                                                             |
 | `--delete-tars`      | *(flag)*           | Delete the downloaded `.tar.xz` files after extraction. Default: keep them.                                                                      |
 | `--dry-run`          | *(flag)*           | Show which tarballs and FASTA files **would** be downloaded and extracted without actually doing it. Great for testing your filters first.       |
