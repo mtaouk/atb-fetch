@@ -9,12 +9,8 @@ compressed tar archives.
 ## About AllTheBacteria (ATB)
 
 [AllTheBacteria (ATB)](https://osf.io/4yv85/) is a public collection of
-over two million bacterial genome assemblies.\
-To keep the dataset manageable in size, assemblies are packaged into
-`.tar.xz` archives using **Miniphy** compression.\
-Each archive contains up to \~4000 gzipped FASTA files.
-
-This compression is essential for the database however, the downside is:
+over two million bacterial genome assemblies. To keep the dataset manageable in size, assemblies are packaged into
+`.tar.xz` archives using **Miniphy** compression. Each archive contains up to \~4000 gzipped FASTA files. This compression is essential for the database however, the downside is:
 
 1.  You must **identify** which archive holds your genome(s)
 
